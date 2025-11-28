@@ -1,24 +1,4 @@
-/**
- * script.js
- * - Preserves your original DOMContentLoaded logic and helpers
- * - ADDED: CONFIG block to control glass options:
- *     - glassIntensity: "light" | "medium" | "strong"  (default: "strong")
- *     - glassSheen: true | false                      (default: true)
- *     - glassShortcut: true | false                   (default: true) -- Ctrl/Cmd+G
- * - applyTheme now applies runtime CSS variable overrides based on CONFIG.
- * - Non-structural changes only — no HTML modifications.
- */
-
 document.addEventListener("DOMContentLoaded", () => {
-  // ====== ADDED: Options / config (edit these values) ======
-  // You can change these values to quickly adjust behavior without touching CSS.
-  const CONFIG = {
-    glassIntensity: 'strong', // 'light' | 'medium' | 'strong'
-    glassSheen: true,         // true = enable sheen animation on hero/profile
-    glassShortcut: true       // true = enable Ctrl/Cmd + G to toggle glass
-  };
-  // ====== end CONFIG ======
-
   // helpers
   const $ = (sel, ctx = document) => ctx.querySelector(sel);
   const $$ = (sel, ctx = document) => Array.from((ctx || document).querySelectorAll(sel));
@@ -27,30 +7,11 @@ document.addEventListener("DOMContentLoaded", () => {
   // elements
   const root = document.documentElement;
   const themeButtons = $$('.theme-btn');
-  const THEME_KEY = 'site-theme'; // preserved key name
-  const stored = localStorage.getItem(THEME_KEY);
-
-  // ADDED: helper to map intensity -> blur values (keeps CSS flexible)
-  function intensityToBlurs(intensity) {
-    switch ((intensity || '').toLowerCase()) {
-      case 'light':
-        return { blur: '10px', blurStrong: '18px' };
-      case 'medium':
-        return { blur: '18px', blurStrong: '26px' };
-      case 'strong':
-      default:
-        return { blur: '28px', blurStrong: '36px' };
-    }
-  }
+  const stored = localStorage.getItem('site-theme');
 
   // Apply theme (also updates nav/button visuals)
   function applyTheme(theme, persist = true) {
-    // add a smooth transition utility class for nicer switch (ADDED)
-    document.body.classList.remove('theme-transition');
-    void document.body.offsetWidth; // force reflow
-    document.body.classList.add('theme-transition');
-
-    // remove any previous data-theme (light = no data-theme)
+    // remove any previous data-theme
     if (theme === 'light' || !theme) {
       root.removeAttribute('data-theme');
     } else {
@@ -66,39 +27,7 @@ document.addEventListener("DOMContentLoaded", () => {
     });
 
     if (persist) {
-      try { localStorage.setItem(THEME_KEY, theme || 'light'); } catch (e) { /* ignore */ }
-    }
-
-    // ADDED: apply intensity overrides (set CSS variables at runtime)
-    // Only apply when glass theme is active; leaving CSS defaults otherwise.
-    if ((theme || '') === 'glass') {
-      const blurs = intensityToBlurs(CONFIG.glassIntensity);
-      root.style.setProperty('--glass-blur', blurs.blur);
-      root.style.setProperty('--glass-blur-strong', blurs.blurStrong);
-      // optionally adjust glass opacity / drop shadow tuning (keeps consistent)
-      if (CONFIG.glassIntensity === 'light') {
-        root.style.setProperty('--glass-opacity', '0.035');
-        root.style.setProperty('--glass-drop-shadow', 'rgba(7,12,20,0.36)');
-      } else if (CONFIG.glassIntensity === 'medium') {
-        root.style.setProperty('--glass-opacity', '0.05');
-        root.style.setProperty('--glass-drop-shadow', 'rgba(7,12,20,0.44)');
-      } else {
-        root.style.setProperty('--glass-opacity', '0.06');
-        root.style.setProperty('--glass-drop-shadow', 'rgba(7,12,20,0.48)');
-      }
-    } else {
-      // Remove overrides to fall back to CSS defaults for other themes
-      root.style.removeProperty('--glass-blur');
-      root.style.removeProperty('--glass-blur-strong');
-      root.style.removeProperty('--glass-opacity');
-      root.style.removeProperty('--glass-drop-shadow');
-    }
-
-    // If glass: toggle sheen to hero/profile elements depending on CONFIG
-    if ((theme || '') === 'glass' && CONFIG.glassSheen) {
-      document.querySelectorAll('.profile-photo-container, .hero-text-content h1').forEach(el => el.classList.add('glass-sheen'));
-    } else {
-      document.querySelectorAll('.profile-photo-container, .hero-text-content h1').forEach(el => el.classList.remove('glass-sheen'));
+      try { localStorage.setItem('site-theme', theme || 'light'); } catch (e) { /* ignore */ }
     }
   }
 
@@ -127,20 +56,6 @@ document.addEventListener("DOMContentLoaded", () => {
       }
     });
   });
-
-  // ADDED: keyboard shortcut (ctrl/cmd + g) to toggle glass quickly (only if enabled)
-  if (CONFIG.glassShortcut) {
-    window.addEventListener('keydown', (e) => {
-      // ensure not typing in inputs (prevent accidental toggles)
-      const tag = (e.target && e.target.tagName) ? e.target.tagName.toLowerCase() : '';
-      if (tag === 'input' || tag === 'textarea' || e.target.isContentEditable) return;
-      if ((e.ctrlKey || e.metaKey) && e.key.toLowerCase() === 'g') {
-        const current = root.getAttribute('data-theme') || 'light';
-        const newTheme = current === 'glass' ? 'light' : 'glass';
-        applyTheme(newTheme, true);
-      }
-    });
-  }
 
   /* ---------- rest of your existing JS (nav, smooth scroll, reveal, etc.) ---------- */
 
