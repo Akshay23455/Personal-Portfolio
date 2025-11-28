@@ -1,3 +1,11 @@
+/**
+ * script.js
+ * - Preserves your original DOMContentLoaded logic and helpers
+ * - ADDED: theme handling helpers (THEME_KEY), smooth transition helper,
+ *          glass-sheen toggle for hero/profile, and Ctrl/Cmd+G shortcut.
+ * - Non-structural changes only — no HTML modifications.
+ */
+
 // ADDED: small helper to scope selectors (kept from your combined file)
 document.addEventListener("DOMContentLoaded", () => {
   // helpers
