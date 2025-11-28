@@ -1,3 +1,4 @@
+// ADDED: small helper to scope selectors (kept from your combined file)
 document.addEventListener("DOMContentLoaded", () => {
   // helpers
   const $ = (sel, ctx = document) => ctx.querySelector(sel);
@@ -7,11 +8,17 @@ document.addEventListener("DOMContentLoaded", () => {
   // elements
   const root = document.documentElement;
   const themeButtons = $$('.theme-btn');
-  const stored = localStorage.getItem('site-theme');
+  const THEME_KEY = 'site-theme'; // preserved key name
+  const stored = localStorage.getItem(THEME_KEY);
 
   // Apply theme (also updates nav/button visuals)
   function applyTheme(theme, persist = true) {
-    // remove any previous data-theme
+    // add a smooth transition utility class for nicer switch (ADDED)
+    document.body.classList.remove('theme-transition');
+    void document.body.offsetWidth; // force reflow
+    document.body.classList.add('theme-transition');
+
+    // remove any previous data-theme (light = no data-theme)
     if (theme === 'light' || !theme) {
       root.removeAttribute('data-theme');
     } else {
@@ -26,8 +33,16 @@ document.addEventListener("DOMContentLoaded", () => {
       btn.setAttribute('aria-pressed', on ? 'true' : 'false');
     });
 
+    // persist
     if (persist) {
-      try { localStorage.setItem('site-theme', theme || 'light'); } catch (e) { /* ignore */ }
+      try { localStorage.setItem(THEME_KEY, theme || 'light'); } catch (e) { /* ignore */ }
+    }
+
+    // If glass: optionally add glass-sheen to hero elements for luxe effect (ADDED, non-invasive)
+    if ((theme || '') === 'glass') {
+      document.querySelectorAll('.profile-photo-container, .hero-text-content h1').forEach(el => el.classList.add('glass-sheen'));
+    } else {
+      document.querySelectorAll('.profile-photo-container, .hero-text-content h1').forEach(el => el.classList.remove('glass-sheen'));
     }
   }
 
@@ -55,6 +70,15 @@ document.addEventListener("DOMContentLoaded", () => {
         btn.click();
       }
     });
+  });
+
+  // ADDED: keyboard shortcut (ctrl/cmd + g) to toggle glass quickly
+  window.addEventListener('keydown', (e) => {
+    if ((e.ctrlKey || e.metaKey) && e.key.toLowerCase() === 'g') {
+      const current = root.getAttribute('data-theme') || 'light';
+      const newTheme = current === 'glass' ? 'light' : 'glass';
+      applyTheme(newTheme, true);
+    }
   });
 
   /* ---------- rest of your existing JS (nav, smooth scroll, reveal, etc.) ---------- */
