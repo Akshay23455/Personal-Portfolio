@@ -266,12 +266,13 @@ h1, h2, h3 {
     height: 100%;
     object-fit: cover;
 
-    /* FACE AT TOP → pull image DOWN strongly */
-    object-position: 50% 100%;
+    /* Drag the photo DOWN so face enters the circle */
+    object-position: 50% 30%;
 
     transform: scale(1);
     transform-origin: center;
 }
+
 /* Slightly lift text so it doesn't overlap the photo */
 .hero-text-content {
     z-index: 3;
