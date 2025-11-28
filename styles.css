@@ -112,7 +112,7 @@ h1, h2, h3 {
     align-items: center;
     color: white;
     text-align: center;
-    overflow: hidden;
+    overflow: visible;
 }
 
 .background-video {
