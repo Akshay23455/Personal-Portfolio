@@ -251,12 +251,13 @@ h1, h2, h3 {
     width: 100%;
     height: 100%;
     object-fit: cover;
-    object-position: 50% 50%;   /* keep the face centered */
-    transform: scale(1);        /* no zoom — shows the whole headshot clearly */
+
+    /* Drag image DOWN by showing more of the top area */
+    object-position: 50% 70%;  /* Adjusted from 50% → 70% */
+
+    transform: scale(1);
     transform-origin: center;
-    transition: transform 0.3s ease, object-position 0.3s ease;
-    -webkit-transform: scale(1);
-    -webkit-transform-origin: center;
+    transition: all 0.3s ease;
 }
 
 /* Optional: slightly smaller container to make the face feel proportionate (keep if you like) */
