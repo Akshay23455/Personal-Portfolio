@@ -266,12 +266,11 @@ h1, h2, h3 {
     height: 100%;
     object-fit: cover;
 
-    /* Adjusted final face positioning */
-    object-position: 50% 75%;     /* 75% = slightly down → face fully visible */
+    /* Pull photo DOWN much more */
+    object-position: 50% 90%;
 
-    transform: scale(1);          /* no zoom → clear full face */
+    transform: scale(1);
     transform-origin: center;
-    transition: all 0.3s ease;    /* smooth changes */
 }
 
 
