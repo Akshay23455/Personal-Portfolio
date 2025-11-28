@@ -6,7 +6,9 @@
     <title>R.S. Akshay Kanna - Portfolio</title>
 
     <link rel="stylesheet" href="styles.css" />
+    <!-- Font Awesome -->
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css" />
+    <!-- Google Fonts -->
     <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;600;700&display=swap" rel="stylesheet">
 </head>
 <body>
@@ -24,7 +26,7 @@
                 <li><a href="#skills">Skills</a></li>
                 <li><a href="#contact">Contact</a></li>
             </ul>
-            <div class="burger-menu" id="burgerMenu">
+            <div class="burger-menu" id="burgerMenu" aria-label="Menu" role="button">
                 <div class="line1"></div>
                 <div class="line2"></div>
                 <div class="line3"></div>
@@ -33,6 +35,7 @@
 
         <div class="hero-content">
             <div class="profile-photo-container">
+                <!-- Replace hero.jpg with a better-cropped image so your face is centered -->
                 <img src="hero.jpg" alt="R.S. Akshay Kanna" class="profile-photo" />
             </div>
             <div class="hero-text-content">
@@ -118,35 +121,41 @@
                     <div id="form-message" class="form-message"></div>
                 </form>
                 <div class="social-links">
-                   <a href="mailto:jsj9001ak47@gmail.com" target="_blank" title="Email">
-                <i class="fas fa-envelope"></i>
-            </a>
-            <a href="https://github.com/Akshay23455" target="_blank" title="GitHub">
-                <i class="fab fa-github"></i>
-            </a>
-            <a href="https://www.instagram.com/_akshay_._kanna_._?igsh=eGhyNDc4ZXhmOHYz&utm_source=qr" 
-               target="_blank" title="Instagram">
-                <i class="fab fa-instagram"></i>
-            </a>
-            <a href="https://www.linkedin.com/in/akshay-kanna-601806307?utm_source=share_via&utm_content=profile&utm_medium=member_ios" 
-               target="_blank" title="LinkedIn">
-                <i class="fab fa-linkedin"></i>
-            </a>
+                    <a href="mailto:jsj9001ak47@gmail.com" target="_blank" title="Email"><i class="fas fa-envelope"></i></a>
+                    <a href="https://github.com/Akshay23455" target="_blank" title="GitHub"><i class="fab fa-github"></i></a>
+                    <a href="https://www.instagram.com/_akshay_._kanna_._?igsh=eGhyNDc4ZXhmOHYz&utm_source=qr" target="_blank" title="Instagram"><i class="fab fa-instagram"></i></a>
+                    <a href="https://www.linkedin.com/in/akshay-kanna-601806307?utm_source=share_via&utm_content=profile&utm_medium=member_ios" target="_blank" title="LinkedIn"><i class="fab fa-linkedin"></i></a>
                 </div>
             </div>
         </section>
     </main>
 
-    <footer>
-        <div class="container">
-            <p>&copy; <span id="current-year"></span> R.S. Akshay Kanna. All rights reserved.</p>
+    <!-- Footer -->
+    <footer class="footer">
+        <div class="container footer-content">
+            <div class="footer-left">
+                <p>&copy; <span id="current-year"></span> R.S. Akshay Kanna. All rights reserved.</p>
+            </div>
+
+            <div class="footer-right">
+                <a href="mailto:jsj9001ak47@gmail.com" target="_blank" title="Email">
+                    <i class="fas fa-envelope"></i>
+                </a>
+                <a href="https://github.com/Akshay23455" target="_blank" title="GitHub">
+                    <i class="fab fa-github"></i>
+                </a>
+                <a href="https://www.instagram.com/_akshay_._kanna_._?igsh=eGhyNDc4ZXhmOHYz&utm_source=qr" target="_blank" title="Instagram">
+                    <i class="fab fa-instagram"></i>
+                </a>
+                <a href="https://www.linkedin.com/in/akshay-kanna-601806307?utm_source=share_via&utm_content=profile&utm_medium=member_ios" target="_blank" title="LinkedIn">
+                    <i class="fab fa-linkedin"></i>
+                </a>
+            </div>
         </div>
     </footer>
 
     <button id="backToTopBtn" title="Go to top"><i class="fas fa-arrow-up"></i></button>
 
-    <script src="script.js">
-    document.getElementById("current-year").textContent = new Date().getFullYear();
-    </script>
+    <script src="script.js"></script>
 </body>
 </html>
