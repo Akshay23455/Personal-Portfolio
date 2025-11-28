@@ -252,13 +252,14 @@ h1, h2, h3 {
     height: 100%;
     object-fit: cover;
 
-    /* Drag image DOWN by showing more of the top area */
-    object-position: 50% 70%;  /* Adjusted from 50% → 70% */
+    /* Move photo further DOWN */
+    object-position: 50% 75%;
 
     transform: scale(1);
     transform-origin: center;
     transition: all 0.3s ease;
 }
+
 
 /* Optional: slightly smaller container to make the face feel proportionate (keep if you like) */
 .profile-photo-container {
