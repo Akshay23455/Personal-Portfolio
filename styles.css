@@ -266,15 +266,12 @@ h1, h2, h3 {
     height: 100%;
     object-fit: cover;
 
-    /* Pull photo DOWN much more */
-    object-position: 50% 90%;
+    /* FACE AT TOP → pull image DOWN strongly */
+    object-position: 50% 100%;
 
     transform: scale(1);
     transform-origin: center;
 }
-
-
-
 /* Slightly lift text so it doesn't overlap the photo */
 .hero-text-content {
     z-index: 3;
