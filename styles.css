@@ -245,6 +245,7 @@ h1, h2, h3 {
 }
 
 /* Profile photo container placed above overlay/video, larger, clear border & shadow */
+/* Profile Photo Container */
 .profile-photo-container {
     width: 200px;
     height: 200px;
@@ -252,20 +253,19 @@ h1, h2, h3 {
     overflow: hidden;
     border: 5px solid rgba(255,255,255,0.92);
     box-shadow: 0 12px 30px rgba(0,0,0,0.45);
-    z-index: 4;
     position: relative;
-    animation: none;
+    z-index: 4;
 }
 
+/* Zoom photo by 35% */
 .profile-photo {
     width: 100%;
     height: 100%;
     object-fit: cover;
-    display: block;
-    filter: none;
-    -webkit-transform: translateZ(0);
-    transform: translateZ(0);
+    transform: scale(1.35);   /* ← Zooms in by 35% */
+    transform-origin: center; /* Keep face centered */
 }
+
 
 /* Slightly lift text so it doesn't overlap the photo */
 .hero-text-content {
