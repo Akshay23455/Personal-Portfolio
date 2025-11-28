@@ -585,4 +585,158 @@ footer {
         object-position: center 28%;
     }
 }
+/* --- Social icons: sliding labels, brand colors, scale/glow, mobile sizes --- */
+
+/* base layout for the icon buttons */
+.social-links {
+  display: flex;
+  justify-content: center;
+  gap: 1.25rem;
+  align-items: center;
+}
+
+.social-links a {
+  position: relative;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  width: 50px;
+  height: 50px;
+  border-radius: 12px;
+  background: transparent;
+  color: var(--primary-color);
+  text-decoration: none;
+  transition: transform 240ms cubic-bezier(.2,.9,.3,1),
+              box-shadow 240ms cubic-bezier(.2,.9,.3,1),
+              background 240ms cubic-bezier(.2,.9,.3,1),
+              color 240ms ease;
+  -webkit-tap-highlight-color: transparent;
+  overflow: visible;
+}
+
+/* icon size + smooth scaling */
+.social-links a i {
+  font-size: 1.45rem;
+  line-height: 1;
+  transition: transform 200ms ease;
+  display: inline-block;
+}
+
+/* small floating label that slides up from bottom — uses the title attribute */
+.social-links a::after {
+  content: attr(title);
+  position: absolute;
+  left: 50%;
+  bottom: -34px;
+  transform: translateX(-50%) translateY(8px);
+  opacity: 0;
+  pointer-events: none;
+  background: rgba(0,0,0,0.7);
+  color: #fff;
+  font-size: 0.75rem;
+  padding: 6px 8px;
+  border-radius: 6px;
+  white-space: nowrap;
+  transition: transform 220ms cubic-bezier(.2,.9,.3,1), opacity 220ms ease;
+  box-shadow: 0 6px 18px rgba(0,0,0,0.35);
+}
+
+/* hover / focus visual */
+.social-links a:hover,
+.social-links a:focus {
+  transform: translateY(-6px) scale(1.06);
+  box-shadow: 0 14px 40px rgba(0,0,0,0.18);
+  color: #fff;
+  outline: none;
+}
+
+/* scale icon slightly inside */
+.social-links a:hover i,
+.social-links a:focus i {
+  transform: scale(1.12);
+}
+
+/* show label on hover/focus */
+.social-links a:hover::after,
+.social-links a:focus::after {
+  transform: translateX(-50%) translateY(0);
+  opacity: 1;
+}
+
+/* Focus-visible accessibility */
+.social-links a:focus-visible {
+  box-shadow: 0 8px 30px rgba(0,0,0,0.22), 0 0 0 4px rgba(52,152,219,0.12);
+}
+
+/* --- Brand colors on hover (uses href contains match: no HTML edits required) --- */
+
+/* LinkedIn: blue */
+.social-links a[href*="linkedin.com"]:hover,
+.social-links a[href*="linkedin.com"]:focus {
+  background: linear-gradient(135deg,#0077b5,#0a66c2);
+  box-shadow: 0 14px 40px rgba(10,102,194,0.25);
+}
+
+/* Instagram: gradient purple → orange */
+.social-links a[href*="instagram.com"]:hover,
+.social-links a[href*="instagram.com"]:focus {
+  background: linear-gradient(135deg,#833ab4 0%, #fd1d1d 50%, #fcb045 100%);
+  box-shadow: 0 14px 40px rgba(249, 100, 63, 0.25);
+}
+
+/* GitHub: dark / neutral */
+.social-links a[href*="github.com"]:hover,
+.social-links a[href*="github.com"]:focus {
+  background: linear-gradient(135deg,#24292e 0%, #57606a 100%);
+  box-shadow: 0 14px 40px rgba(36,41,46,0.28);
+}
+
+/* Email: accent color */
+.social-links a[href^="mailto:"]:hover,
+.social-links a[href^="mailto:"]:focus {
+  background: linear-gradient(135deg,var(--secondary-color), #2a80b9);
+  box-shadow: 0 14px 40px rgba(52,152,219,0.2);
+}
+
+/* optional: lighten the icon color while hovered (ensures contrast) */
+.social-links a:hover i,
+.social-links a:focus i {
+  color: #fff !important;
+}
+
+/* --- Mobile: larger tappable icons & bigger labels --- */
+@media (max-width: 768px) {
+  .social-links a {
+    width: 56px;
+    height: 56px;
+    border-radius: 14px;
+  }
+  .social-links a i {
+    font-size: 1.8rem;
+  }
+  .social-links a::after {
+    font-size: 0.84rem;
+    bottom: -38px;
+  }
+}
+
+@media (max-width: 480px) {
+  .social-links a {
+    width: 64px;
+    height: 64px;
+    border-radius: 16px;
+  }
+  .social-links a i {
+    font-size: 2rem;
+  }
+  .social-links a::after {
+    font-size: 0.9rem;
+    bottom: -42px;
+  }
+
+  /* stack with tighter gap on tiny screens if desired */
+  .social-links {
+    gap: 0.9rem;
+  }
+}
 
