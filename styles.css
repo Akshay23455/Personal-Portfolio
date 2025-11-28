@@ -671,3 +671,33 @@ footer {
         transform: translateX(0px);
     }
 }
+.footer {
+    background: #111;
+    color: #fff;
+    padding: 20px 0;
+    margin-top: 40px;
+}
+
+.footer-content {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    flex-wrap: wrap;
+}
+
+.footer-left p {
+    font-size: 14px;
+}
+
+.footer-right a {
+    color: #fff;
+    margin-left: 15px;
+    font-size: 18px;
+    transition: 0.3s ease;
+}
+
+.footer-right a:hover {
+    color: #00bfff;
+    transform: scale(1.2);
+}
+
