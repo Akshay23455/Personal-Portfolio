@@ -124,15 +124,17 @@ h1, h2, h3 {
     z-index: -2;
     transform: translate(-50%, -50%);
     object-fit: cover;
+    filter: brightness(0.92); /* Slight brightening */
 }
 
+/* Reduced overlay darkness so face is visible */
 .background-overlay {
     position: absolute;
     top: 0;
     left: 0;
     width: 100%;
     height: 100%;
-    background-color: var(--hero-overlay-color);
+    background-color: rgba(0, 0, 0, 0.32); /* lowered opacity for face visibility */
     z-index: -1;
     transition: background-color 0.3s ease;
 }
@@ -223,8 +225,9 @@ h1, h2, h3 {
 }
 
 /* Hero Content */
+/* Bring hero content and profile photo above overlay */
 .hero-content {
-    z-index: 1;
+    z-index: 3;
     display: flex;
     flex-direction: column;
     align-items: center;
@@ -241,19 +244,17 @@ h1, h2, h3 {
     }
 }
 
+/* Profile photo container placed above overlay/video, larger, clear border & shadow */
 .profile-photo-container {
-    width: 180px;
-    height: 180px;
+    width: 200px;
+    height: 200px;
     border-radius: 50%;
     overflow: hidden;
-    border: 5px solid white;
-    box-shadow: 0 0 0 5px var(--secondary-color); /* Double border effect */
-    animation: pulseBorder 2s infinite alternate;
-}
-
-@keyframes pulseBorder {
-    from { box-shadow: 0 0 0 5px var(--secondary-color); }
-    to { box-shadow: 0 0 0 10px rgba(52, 152, 219, 0.5); }
+    border: 5px solid rgba(255,255,255,0.92);
+    box-shadow: 0 12px 30px rgba(0,0,0,0.45);
+    z-index: 4;
+    position: relative;
+    animation: none;
 }
 
 .profile-photo {
@@ -261,12 +262,21 @@ h1, h2, h3 {
     height: 100%;
     object-fit: cover;
     display: block;
+    filter: none;
+    -webkit-transform: translateZ(0);
+    transform: translateZ(0);
+}
+
+/* Slightly lift text so it doesn't overlap the photo */
+.hero-text-content {
+    z-index: 3;
+    margin-top: -10px;
 }
 
 .hero-text-content h1 {
     font-size: 3.5rem;
     margin-bottom: 0.5rem;
-    color: white; /* Override for hero text */
+    color: white;
     text-shadow: 2px 2px 4px rgba(0,0,0,0.5);
 }
 
@@ -301,7 +311,7 @@ h1, h2, h3 {
     padding: 0;
     display: flex;
     flex-wrap: wrap;
-    justify-content: center; /* Center align items */
+    justify-content: center;
     gap: 1rem;
     margin-top: 1rem;
 }
@@ -447,7 +457,7 @@ h1, h2, h3 {
     border: 1px solid var(--border-color);
     border-radius: 8px;
     font-size: 1rem;
-    width: calc(100% - 2rem); /* Account for padding */
+    width: calc(100% - 2rem);
     background-color: var(--background-color-light);
     color: var(--text-color);
     transition: border-color 0.3s ease, background-color 0.3s ease;
@@ -464,14 +474,14 @@ h1, h2, h3 {
     margin-top: 1rem;
     font-size: 1rem;
     font-weight: 500;
-    color: var(--primary-color); /* Default for success */
+    color: var(--primary-color);
 }
 
 .form-message.error {
     color: var(--accent-color);
 }
 
-
+/* Social links block in contact area */
 .social-links {
     margin-top: 3rem;
     display: flex;
@@ -486,11 +496,10 @@ h1, h2, h3 {
 }
 
 .social-links a:hover {
-    color: var(--secondary-color);
     transform: translateY(-5px);
 }
 
-/* Footer */
+/* Footer (main styling) */
 footer {
     background: var(--primary-color);
     color: white;
@@ -538,6 +547,102 @@ footer {
     transform: translateY(0);
 }
 
+/* Keyframes for Nav Links Animation */
+@keyframes navLinkFade {
+    from {
+        opacity: 0;
+        transform: translateX(50px);
+    }
+    to {
+        opacity: 1;
+        transform: translateX(0px);
+    }
+}
+
+/* Footer alternate styling (used for container layout inside footer) */
+.footer {
+    background: #111;
+    color: #fff;
+    padding: 20px 0;
+    margin-top: 40px;
+}
+
+.footer-content {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    flex-wrap: wrap;
+}
+
+.footer-left p {
+    font-size: 14px;
+    margin: 0;
+}
+
+.footer-right a {
+    color: #fff;
+    margin-left: 15px;
+    font-size: 18px;
+    transition: 0.3s ease, transform 0.2s ease;
+}
+
+.footer-right a:hover {
+    transform: scale(1.05);
+}
+
+/* ---------- Brand color hover rules (social icons) ---------- */
+/* Keep hover transform for both social blocks */
+.social-links a:hover,
+.footer-right a:hover {
+    transition: color 0.25s ease, transform 0.25s ease;
+}
+
+/* Email (Gmail-like red) */
+.social-links a[href^="mailto"],
+.footer-right a[href^="mailto"] {
+    color: var(--primary-color);
+}
+.social-links a[href^="mailto"]:hover,
+.footer-right a[href^="mailto"]:hover {
+    color: #EA4335; /* Gmail red */
+}
+
+/* GitHub (use light tint for contrast on dark footer) */
+.social-links a[href*="github"],
+.footer-right a[href*="github"] {
+    color: var(--primary-color);
+}
+.social-links a[href*="github"]:hover,
+.footer-right a[href*="github"]:hover {
+    color: #ffffff; /* white on dark footer for contrast */
+    text-shadow: 0 2px 8px rgba(0,0,0,0.5);
+}
+
+/* Instagram (pink/orange-ish) */
+.social-links a[href*="instagram"],
+.footer-right a[href*="instagram"] {
+    color: var(--primary-color);
+}
+.social-links a[href*="instagram"]:hover,
+.footer-right a[href*="instagram"]:hover {
+    color: #E4405F;
+}
+
+/* LinkedIn (brand blue) */
+.social-links a[href*="linkedin"],
+.footer-right a[href*="linkedin"] {
+    color: var(--primary-color);
+}
+.social-links a[href*="linkedin"]:hover,
+.footer-right a[href*="linkedin"]:hover {
+    color: #0A66C2;
+}
+
+/* Fallback hover for other social anchors */
+.social-links a:hover:not([href*="instagram"]):not([href*="github"]):not([href*="linkedin"]):not([href^="mailto"]),
+.footer-right a:hover:not([href*="instagram"]):not([href*="github"]):not([href*="linkedin"]):not([href^="mailto"]) {
+    color: var(--secondary-color);
+}
 
 /* Responsive Design */
 @media (max-width: 992px) {
@@ -659,45 +764,3 @@ footer {
         font-size: 1rem;
     }
 }
-
-/* Keyframes for Nav Links Animation */
-@keyframes navLinkFade {
-    from {
-        opacity: 0;
-        transform: translateX(50px);
-    }
-    to {
-        opacity: 1;
-        transform: translateX(0px);
-    }
-}
-.footer {
-    background: #111;
-    color: #fff;
-    padding: 20px 0;
-    margin-top: 40px;
-}
-
-.footer-content {
-    display: flex;
-    align-items: center;
-    justify-content: space-between;
-    flex-wrap: wrap;
-}
-
-.footer-left p {
-    font-size: 14px;
-}
-
-.footer-right a {
-    color: #fff;
-    margin-left: 15px;
-    font-size: 18px;
-    transition: 0.3s ease;
-}
-
-.footer-right a:hover {
-    color: #00bfff;
-    transform: scale(1.2);
-}
-
