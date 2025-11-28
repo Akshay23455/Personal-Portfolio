@@ -140,26 +140,26 @@
         </form>
         <div class="social-links">
           <a href="mailto:jsj9001ak47@gmail.com" target="_blank" rel="noopener noreferrer" title="Email">
-  <i class="fas fa-envelope"></i>
-</a>
+            <i class="fas fa-envelope"></i>
+          </a>
 
-<a href="https://github.com/Akshay23455" target="_blank" rel="noopener noreferrer" title="GitHub">
-  <i class="fab fa-github"></i>
-</a>
+          <a href="https://github.com/Akshay23455" target="_blank" rel="noopener noreferrer" title="GitHub">
+            <i class="fab fa-github"></i>
+          </a>
 
-<a href="https://www.instagram.com/_akshay_._kanna_._?igsh=eGhyNDc4ZXhmOHYz&utm_source=qr" 
-   target="_blank" 
-   rel="noopener noreferrer" 
-   title="Instagram">
-  <i class="fab fa-instagram"></i>
-</a>
+          <a href="https://www.instagram.com/_akshay_._kanna_._?igsh=eGhyNDc4ZXhmOHYz&utm_source=qr" 
+             target="_blank" 
+             rel="noopener noreferrer" 
+             title="Instagram">
+            <i class="fab fa-instagram"></i>
+          </a>
 
-<a href="https://www.linkedin.com/in/akshay-kanna-601806307?utm_source=share_via&utm_content=profile&utm_medium=member_ios" 
-   target="_blank" 
-   rel="noopener noreferrer" 
-   title="LinkedIn">
-  <i class="fab fa-linkedin"></i>
-</a>
+          <a href="https://www.linkedin.com/in/akshay-kanna-601806307?utm_source=share_via&utm_content=profile&utm_medium=member_ios" 
+             target="_blank" 
+             rel="noopener noreferrer" 
+             title="LinkedIn">
+            <i class="fab fa-linkedin"></i>
+          </a>
         </div>
       </div>
     </section>
@@ -174,5 +174,13 @@
   <button id="backToTopBtn" title="Go to top"><i class="fas fa-arrow-up"></i></button>
 
   <script src="script.js" defer></script>
+  <script>
+    // small script to set year (unchanged)
+    document.addEventListener('DOMContentLoaded', () => {
+      const y = new Date().getFullYear();
+      const el = document.getElementById('current-year');
+      if (el) el.textContent = y;
+    });
+  </script>
 </body>
 </html>
