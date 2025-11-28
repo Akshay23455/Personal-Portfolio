@@ -5,6 +5,7 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <title>R.S. Akshay Kanna - Portfolio</title>
 
+    <!-- Make sure this file name matches the CSS file below -->
     <link rel="stylesheet" href="styles.css" />
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css" />
     <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;600;700&display=swap" rel="stylesheet">
@@ -18,25 +19,28 @@
 
         <nav class="main-nav">
             <div class="nav-brand">Akshay Kanna</div>
+
             <ul class="nav-links" id="navLinks">
                 <li><a href="#about">About Me</a></li>
                 <li><a href="#education">Education</a></li>
                 <li><a href="#skills">Skills</a></li>
                 <li><a href="#contact">Contact</a></li>
             </ul>
-            <div class="burger-menu" id="burgerMenu">
+
+            <div class="burger-menu" id="burgerMenu" role="button" aria-label="Toggle navigation" aria-expanded="false" tabindex="0">
                 <div class="line1"></div>
                 <div class="line2"></div>
                 <div class="line3"></div>
             </div>
         </nav>
 
-        <div class="hero-content">
+        <div class="hero-content container">
             <div class="profile-photo-container">
                 <img src="hero.jpg" alt="R.S. Akshay Kanna" class="profile-photo" />
             </div>
             <div class="hero-text-content">
-                <h1>Hi, I'm <span class="highlight">R.S. Akshay Kanna</span></h1>
+                <!-- Typing ID added so the typing effect runs; optional but recommended -->
+                <h1 id="hero-typing">Hi, I'm <span class="highlight">R.S. Akshay Kanna</span></h1>
                 <p>Computer Science Engineering student at St. Xavier's Catholic College of Engineering.</p>
                 <div class="hero-buttons">
                     <a href="#about" class="btn primary-btn">Learn More</a>
@@ -75,7 +79,7 @@
                     <p class="graduation-date">Expected Graduation: May 2027</p>
                     <p class="details">Currently in my third year, focusing on core CSE subjects, participating in coding challenges, and working on various projects.</p>
                 </div>
-                </div>
+            </div>
         </section>
 
         <section id="skills" class="section skills-section reveal">
@@ -117,27 +121,27 @@
                     <button type="submit" class="btn primary-btn">Send Message</button>
                     <div id="form-message" class="form-message"></div>
                 </form>
+
                 <div class="social-links">
-    <a href="mailto:jsj9001ak47@gmail.com" target="_blank" title="Email">
-        <i class="fas fa-envelope"></i>
-    </a>
+                    <a href="mailto:jsj9001ak47@gmail.com" target="_blank" rel="noopener noreferrer" title="Email">
+                        <i class="fas fa-envelope"></i>
+                    </a>
 
-    <a href="https://github.com/Akshay23455" target="_blank" title="GitHub">
-        <i class="fab fa-github"></i>
-    </a>
+                    <a href="https://github.com/Akshay23455" target="_blank" rel="noopener noreferrer" title="GitHub">
+                        <i class="fab fa-github"></i>
+                    </a>
 
-    <a href="https://www.instagram.com/_akshay_._kanna_._?igsh=eGhyNDc4ZXhmOHYz&utm_source=qr" 
-       target="_blank" 
-       title="Instagram">
-        <i class="fab fa-instagram"></i>
-    </a>
+                    <a href="https://www.instagram.com/_akshay_._kanna_._?igsh=eGhyNDc4ZXhmOHYz&utm_source=qr" 
+                       target="_blank" rel="noopener noreferrer" title="Instagram">
+                        <i class="fab fa-instagram"></i>
+                    </a>
 
-    <a href="https://www.linkedin.com/in/akshay-kanna-601806307?utm_source=share_via&utm_content=profile&utm_medium=member_ios"
-       target="_blank"
-       title="LinkedIn">
-        <i class="fab fa-linkedin"></i>
-    </a>
-      </div>
+                    <a href="https://www.linkedin.com/in/akshay-kanna-601806307" target="_blank" rel="noopener noreferrer" title="LinkedIn">
+                        <i class="fab fa-linkedin"></i>
+                    </a>
+                </div>
+
+            </div>
         </section>
     </main>
 
@@ -149,6 +153,7 @@
 
     <button id="backToTopBtn" title="Go to top"><i class="fas fa-arrow-up"></i></button>
 
-    <script src="script.js"></script>
+    <!-- script is deferred to ensure DOM parsing first -->
+    <script src="script.js" defer></script>
 </body>
 </html>
