@@ -247,30 +247,31 @@ h1, h2, h3 {
 /* Profile photo container placed above overlay/video, larger, clear border & shadow */
 /* Profile Photo Container */
 /* Profile photo — zoomed OUT for clarity and centered face */
+/* Profile Photo Container */
+.profile-photo-container {
+    width: 200px;                 /* clean size */
+    height: 200px;
+    border-radius: 50%;           /* perfect circle */
+    overflow: hidden;             /* crop image cleanly */
+    border: 5px solid rgba(255, 255, 255, 0.95);
+    box-shadow: 0 12px 30px rgba(0,0,0,0.45);
+    position: relative;
+    z-index: 4;                   /* stay above overlay */
+    margin-top: 20px;             /* spacing fix */
+}
+
+/* Profile Photo — final corrected positioning */
 .profile-photo {
     width: 100%;
     height: 100%;
     object-fit: cover;
 
-    /* Move photo further DOWN */
-    object-position: 50% 75%;
+    /* Adjusted final face positioning */
+    object-position: 50% 75%;     /* 75% = slightly down → face fully visible */
 
-    transform: scale(1);
+    transform: scale(1);          /* no zoom → clear full face */
     transform-origin: center;
-    transition: all 0.3s ease;
-}
-
-
-/* Optional: slightly smaller container to make the face feel proportionate (keep if you like) */
-.profile-photo-container {
-    width: 180px;   /* reduced slightly from 200px for a cleaner crop */
-    height: 180px;
-    border-radius: 50%;
-    overflow: hidden;
-    border: 5px solid rgba(255,255,255,0.92);
-    box-shadow: 0 12px 30px rgba(0,0,0,0.45);
-    z-index: 4;
-    position: relative;
+    transition: all 0.3s ease;    /* smooth changes */
 }
 
 
