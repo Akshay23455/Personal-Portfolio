@@ -100,8 +100,6 @@ h1, h2, h3 {
     box-shadow: 0 5px 10px var(--shadow-color);
 }
 
-/* Removed: Theme Toggle Styles */
-
 /* Hero Section */
 .hero-section {
     position: relative;
@@ -200,7 +198,7 @@ h1, h2, h3 {
 
 /* Burger Menu for Mobile */
 .burger-menu {
-    display: none; /* Hidden on desktop */
+    display: none;
     cursor: pointer;
     z-index: 1001;
 }
@@ -213,7 +211,6 @@ h1, h2, h3 {
     transition: all 0.3s ease;
 }
 
-/* Burger Animation */
 .burger-menu.toggle .line1 {
     transform: rotate(-45deg) translate(-5px, 6px);
 }
@@ -243,14 +240,27 @@ h1, h2, h3 {
     }
 }
 
+/* ⭐ UPDATED: PROFILE PHOTO (FULL IMAGE VISIBLE, FACE NOT CUT) */
 .profile-photo-container {
     width: 180px;
     height: 180px;
     border-radius: 50%;
     overflow: hidden;
     border: 5px solid white;
-    box-shadow: 0 0 0 5px var(--secondary-color); /* Double border effect */
+    box-shadow: 0 0 0 5px var(--secondary-color);
     animation: pulseBorder 2s infinite alternate;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    background-color: rgba(255,255,255,0.06);
+}
+
+.profile-photo {
+    width: 100%;
+    height: 100%;
+    object-fit: contain;       /* full image shown */
+    object-position: center 36%; /* ensures your face is visible */
+    display: block;
 }
 
 @keyframes pulseBorder {
@@ -258,17 +268,10 @@ h1, h2, h3 {
     to { box-shadow: 0 0 0 10px rgba(52, 152, 219, 0.5); }
 }
 
-.profile-photo {
-    width: 100%;
-    height: 100%;
-    object-fit: cover;
-    display: block;
-}
-
 .hero-text-content h1 {
     font-size: 3.5rem;
     margin-bottom: 0.5rem;
-    color: white; /* Override for hero text */
+    color: white;
     text-shadow: 2px 2px 4px rgba(0,0,0,0.5);
 }
 
@@ -303,7 +306,7 @@ h1, h2, h3 {
     padding: 0;
     display: flex;
     flex-wrap: wrap;
-    justify-content: center; /* Center align items */
+    justify-content: center;
     gap: 1rem;
     margin-top: 1rem;
 }
@@ -449,7 +452,7 @@ h1, h2, h3 {
     border: 1px solid var(--border-color);
     border-radius: 8px;
     font-size: 1rem;
-    width: calc(100% - 2rem); /* Account for padding */
+    width: calc(100% - 2rem);
     background-color: var(--background-color-light);
     color: var(--text-color);
     transition: border-color 0.3s ease, background-color 0.3s ease;
@@ -466,14 +469,14 @@ h1, h2, h3 {
     margin-top: 1rem;
     font-size: 1rem;
     font-weight: 500;
-    color: var(--primary-color); /* Default for success */
+    color: var(--primary-color);
 }
 
 .form-message.error {
     color: var(--accent-color);
 }
 
-
+/* Social Links */
 .social-links {
     margin-top: 3rem;
     display: flex;
@@ -528,7 +531,7 @@ footer {
     opacity: 1;
 }
 
-/* Scroll Reveal Animation (Custom) */
+/* Reveal */
 .reveal {
     opacity: 0;
     transform: translateY(50px);
@@ -540,8 +543,7 @@ footer {
     transform: translateY(0);
 }
 
-
-/* Responsive Design */
+/* Responsive */
 @media (max-width: 992px) {
     .hero-text-content h1 {
         font-size: 2.8rem;
@@ -549,127 +551,30 @@ footer {
     .hero-text-content p {
         font-size: 1.1rem;
     }
-
-    .main-nav {
-        padding: 1rem 1.5rem;
-    }
-    .nav-links {
-        margin-left: 1rem;
-    }
-    .nav-links li {
-        margin-left: 1.5rem;
-    }
 }
 
 @media (max-width: 768px) {
-    .main-nav {
-        flex-direction: row;
-        justify-content: space-between;
-        align-items: center;
-    }
-
-    .nav-links {
-        position: absolute;
-        right: 0;
-        top: 0;
-        height: 100vh;
-        background-color: var(--primary-color);
-        flex-direction: column;
-        align-items: center;
-        width: 60%;
-        transform: translateX(100%);
-        transition: transform 0.5s ease-in-out;
-        padding-top: 6rem; /* Space for brand and burger */
-        box-shadow: -5px 0 15px rgba(0,0,0,0.3);
-    }
-
-    .nav-links.nav-active {
-        transform: translateX(0%);
-    }
-
-    .nav-links li {
-        opacity: 0;
-        margin: 1.5rem 0;
-    }
-
-    .nav-links a {
-        font-size: 1.3rem;
-    }
-
-    .burger-menu {
-        display: block;
-    }
-
-    .hero-content {
-        gap: 1.5rem;
-    }
     .profile-photo-container {
         width: 150px;
         height: 150px;
     }
-    .hero-text-content h1 {
-        font-size: 2.5rem;
-    }
-    .hero-text-content p {
-        font-size: 1rem;
-    }
-    .hero-buttons {
-        flex-direction: column;
-        gap: 0.8rem;
-    }
-    .secondary-btn {
-        margin-left: 0;
-    }
-
-    .section {
-        padding: 4rem 0;
-    }
-    .container {
-        padding: 0 1rem;
-    }
-
-    .skill-category {
-        padding: 1.5rem;
-    }
-
-    .contact-form {
-        padding: 1.5rem;
+    .profile-photo {
+        object-position: center 34%;
     }
 }
 
 @media (max-width: 480px) {
-    .hero-text-content h1 {
-        font-size: 2rem;
-    }
-    .hero-text-content p {
-        font-size: 0.9rem;
-    }
     .profile-photo-container {
         width: 120px;
         height: 120px;
     }
-    .social-links {
-        gap: 1rem;
-    }
-    .social-links a {
-        font-size: 1.8rem;
-    }
-    #backToTopBtn {
-        bottom: 1rem;
-        right: 1rem;
-        padding: 0.8rem 1rem;
-        font-size: 1rem;
+    .profile-photo {
+        object-position: center 30%;
     }
 }
 
-/* Keyframes for Nav Links Animation */
+/* Keyframes */
 @keyframes navLinkFade {
-    from {
-        opacity: 0;
-        transform: translateX(50px);
-    }
-    to {
-        opacity: 1;
-        transform: translateX(0px);
-    }
+    from { opacity: 0; transform: translateX(50px); }
+    to { opacity: 1; transform: translateX(0px); }
 }
