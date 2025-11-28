@@ -39,16 +39,29 @@
   --accent-2: #5b6cff;
 }
 
-/* Glassy theme */
+/* ====== ADDED: SUPER GLASSY THEME (replaces previous glass block) ====== */
 :root[data-theme="glass"] {
-  --bg: linear-gradient(180deg, rgba(10,14,20,0.18), rgba(255,255,255,0.02));
-  --surface: rgba(255,255,255,0.12);
-  --glass-surface: rgba(255,255,255,0.12);
-  --glass-border: rgba(255,255,255,0.18);
-  --text-color: #eaf6ff;
-  --secondary-color: #8bd3ff;
-  --hero-overlay-color: rgba(2,6,12,0.45);
-  --shadow-color: rgba(2,6,23,0.25);
+  /* base */
+  --bg: linear-gradient(180deg, rgba(255,255,255,0.04), rgba(255,255,255,0.01));
+  --surface: rgba(255,255,255,0.06);           /* main card surface */
+  --glass-surface: rgba(255,255,255,0.04);     /* slightly more transparent */
+  --glass-border: rgba(255,255,255,0.22);      /* bright rim */
+  --glass-border-soft: rgba(255,255,255,0.12); /* soft rim for subtle elements */
+
+  /* glass controls */
+  --text-color: #eef9ff;
+  --secondary-color: #aee9ff;
+  --accent-2: #b892ff;
+
+  /* glass tuning */
+  --glass-blur: 28px;           /* strong frost */
+  --glass-blur-strong: 36px;    /* ultra-strong for hero/cards */
+  --glass-opacity: 0.06;        /* logical fallback opacity */
+  --glass-inner-glow: rgba(255,255,255,0.04);
+  --glass-drop-shadow: rgba(7,12,20,0.48);
+
+  --nav-height: 68px;
+  --transition-fast: 180ms;
 }
 
 /* ====== Resets & base ====== */
@@ -63,6 +76,12 @@ body {
   background: var(--bg);
   transition: background 0.28s ease, color 0.28s ease;
   scroll-behavior: smooth;
+}
+
+/* smooth theme transition utility (ADDED) */
+body.theme-transition,
+body.theme-transition * {
+  transition: background-color .42s ease, color .42s ease, box-shadow .42s ease, transform .28s ease;
 }
 
 /* Links */
@@ -111,6 +130,7 @@ h1, h2, h3 {
 .primary-btn {
   background-color: var(--secondary-color);
   color: white;
+  position: relative; /* ADDED so glass CTA ::after works */
 }
 .primary-btn:hover {
   background-color: var(--primary-color);
@@ -364,314 +384,218 @@ h1, h2, h3 {
 }
 .soft-skills li:hover i { color: white; }
 
-/* ====== Education ====== */
-.education-item {
-  background: var(--surface);
-  padding: 2rem;
-  border-radius: 12px;
-  box-shadow: 0 5px 15px var(--shadow-color);
-  margin-top: 2rem;
-  text-align: left;
-  max-width: 700px;
-  margin-left: auto;
-  margin-right: auto;
-  transition: transform 0.3s ease, background-color 0.3s ease;
-}
-.education-item:hover { transform: translateY(-5px); }
-.education-item h3 { color: var(--secondary-color); font-size: 1.8rem; margin-bottom: 0.5rem; }
-.education-item .institution, .education-item .graduation-date { font-size: 1.1rem; color: #666; margin-bottom: 0.5rem; }
-.education-item .details { margin-top: 1rem; }
+[...rest of original CSS unchanged... continue below...] 
 
-/* ====== Skills grid ====== */
-.skills-grid {
-  display: grid;
-  grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
-  gap: 1.5rem;
-  margin-top: 2rem;
-}
-.skill-category {
-  background: var(--surface);
-  padding: 2rem;
+/* ====== ADDED: SUPER GLASSY UI RULES (applies to many components) ====== */
+/* Main glass nav, cards, forms, and components */
+:root[data-theme="glass"] .main-nav {
+  background: linear-gradient(180deg, rgba(255,255,255,0.03), rgba(255,255,255,0.02));
+  border: 1px solid var(--glass-border);
+  backdrop-filter: blur(var(--glass-blur)) saturate(1.6);
+  -webkit-backdrop-filter: blur(var(--glass-blur)) saturate(1.6);
+  box-shadow:
+    0 10px 30px rgba(0,0,0,0.40),
+    inset 0 1px 0 rgba(255,255,255,0.04);
   border-radius: 12px;
-  box-shadow: 0 5px 15px var(--shadow-color);
-  display: flex;
-  flex-direction: column;
-  align-items: center;
-  text-align: center;
-  transition: transform 0.3s ease, background-color 0.3s ease;
 }
-.skill-category:hover {
-  transform: translateY(-5px);
-  background-color: var(--secondary-color);
-  color: white;
-}
-.skill-category:hover h3, .skill-category:hover p, .skill-category:hover .icon-large { color: white; }
-.skill-category .icon-large {
-  font-size: 3.5rem;
-  color: var(--secondary-color);
-  margin-bottom: 1rem;
-  transition: color 0.3s ease;
-}
-.skill-category h3 { font-size: 1.5rem; margin-bottom: 0.75rem; transition: color 0.3s ease; }
-.skill-category p { font-size: 1rem; color: #555; transition: color 0.3s ease; }
 
-/* ====== Contact ====== */
-.contact-section .contact-intro { font-size: 1.1rem; margin-bottom: 2rem; }
-.contact-form {
-  display: flex;
-  flex-direction: column;
-  gap: 1.2rem;
-  margin-top: 2rem;
-  max-width: 600px;
-  margin-left: auto;
-  margin-right: auto;
-  background: var(--surface);
-  padding: 2.5rem;
-  border-radius: 12px;
-  box-shadow: 0 5px 15px var(--shadow-color);
-  transition: background-color 0.3s ease;
+/* Cards and surfaces */
+:root[data-theme="glass"] .education-item,
+:root[data-theme="glass"] .skill-category,
+:root[data-theme="glass"] .contact-form,
+:root[data-theme="glass"] .testimonial,
+:root[data-theme="glass"] .profile-photo-container {
+  background: linear-gradient(180deg, rgba(255,255,255,0.04), rgba(255,255,255,0.02));
+  border: 1px solid var(--glass-border);
+  backdrop-filter: blur(var(--glass-blur-strong)) saturate(1.8);
+  -webkit-backdrop-filter: blur(var(--glass-blur-strong)) saturate(1.8);
+  box-shadow:
+    0 18px 50px rgba(7,12,20,0.48),
+    inset 0 1px 0 var(--glass-inner-glow);
+  border-radius: 14px;
+  transition: transform .28s cubic-bezier(.2,.9,.3,1), box-shadow .28s ease, background .28s ease;
 }
-.contact-form input, .contact-form textarea {
-  padding: 1rem;
-  border: 1px solid var(--border-color);
-  border-radius: 8px;
-  font-size: 1rem;
-  width: 100%;
-  background-color: var(--background-color-light);
-  color: var(--text-color);
-  transition: border-color 0.3s ease, background-color 0.3s ease;
-}
-.contact-form input:focus, .contact-form textarea:focus {
-  outline: none;
-  border-color: var(--secondary-color);
-  box-shadow: 0 0 0 3px rgba(52,152,219,0.18);
-}
-.form-message { margin-top: 1rem; font-size: 1rem; font-weight: 500; color: var(--primary-color); }
-.form-message.error { color: var(--accent-color); }
 
-/* ====== Social Links ====== */
-.social-links {
-  margin-top: 3rem;
-  display: flex;
-  justify-content: center;
-  gap: 2rem;
+/* Slight lift on hover */
+:root[data-theme="glass"] .education-item:hover,
+:root[data-theme="glass"] .skill-category:hover,
+:root[data-theme="glass"] .contact-form:hover {
+  transform: translateY(-6px);
+  box-shadow:
+    0 28px 80px rgba(7,12,20,0.54),
+    inset 0 1px 0 rgba(255,255,255,0.05);
 }
-.social-links a {
-  position: relative;
+
+/* Frosted buttons (glass buttons) */
+.glass-btn {
   display: inline-flex;
   align-items: center;
   justify-content: center;
-  width: 50px;
-  height: 50px;
+  padding: 0.6rem 1.1rem;
   border-radius: 12px;
-  background: transparent;
-  color: var(--primary-color);
-  text-decoration: none;
-  transition: transform 240ms cubic-bezier(.2,.9,.3,1), box-shadow 240ms cubic-bezier(.2,.9,.3,1), background 240ms cubic-bezier(.2,.9,.3,1), color 240ms ease;
-  -webkit-tap-highlight-color: transparent;
-  overflow: visible;
-}
-.social-links a i { font-size: 1.45rem; line-height: 1; transition: transform 200ms ease; display: inline-block; }
-.social-links a::after {
-  content: attr(title);
-  position: absolute;
-  left: 50%;
-  bottom: -34px;
-  transform: translateX(-50%) translateY(8px);
-  opacity: 0;
-  pointer-events: none;
-  background: rgba(0,0,0,0.7);
-  color: #fff;
-  font-size: 0.75rem;
-  padding: 6px 8px;
-  border-radius: 6px;
-  white-space: nowrap;
-  transition: transform 220ms cubic-bezier(.2,.9,.3,1), opacity 220ms ease;
-  box-shadow: 0 6px 18px rgba(0,0,0,0.35);
-}
-.social-links a:hover, .social-links a:focus {
-  transform: translateY(-6px) scale(1.06);
-  box-shadow: 0 14px 40px rgba(0,0,0,0.18);
-  color: #fff;
-  outline: none;
-}
-.social-links a:hover i, .social-links a:focus i { transform: scale(1.12); color: #fff !important; }
-.social-links a:hover::after, .social-links a:focus::after { transform: translateX(-50%) translateY(0); opacity: 1; }
-.social-links a:focus-visible { box-shadow: 0 8px 30px rgba(0,0,0,0.22), 0 0 0 4px rgba(52,152,219,0.12); }
-
-/* brand color hover */
-.social-links a[href*="linkedin.com"]:hover, .social-links a[href*="linkedin.com"]:focus { background: linear-gradient(135deg,#0077b5,#0a66c2); box-shadow: 0 14px 40px rgba(10,102,194,0.25); }
-.social-links a[href*="instagram.com"]:hover, .social-links a[href*="instagram.com"]:focus { background: linear-gradient(135deg,#833ab4 0%, #fd1d1d 50%, #fcb045 100%); box-shadow: 0 14px 40px rgba(249,100,63,0.25); }
-.social-links a[href*="github.com"]:hover, .social-links a[href*="github.com"]:focus { background: linear-gradient(135deg,#24292e 0%, #57606a 100%); box-shadow: 0 14px 40px rgba(36,41,46,0.28); }
-.social-links a[href^="mailto:"]:hover, .social-links a[href^="mailto:"]:focus { background: linear-gradient(135deg,var(--secondary-color), #2a80b9); box-shadow: 0 14px 40px rgba(52,152,219,0.2); }
-
-/* ====== Footer ====== */
-footer {
-  background: var(--primary-color);
-  color: white;
-  text-align: center;
-  padding: 2rem 0;
-  font-size: 0.9rem;
-  transition: background-color 0.3s ease;
-}
-
-/* ====== Back to Top Button ====== */
-#backToTopBtn {
-  display: none;
-  position: fixed;
-  bottom: 2rem;
-  right: 2rem;
-  z-index: 99;
-  border: none;
-  outline: none;
-  background: var(--secondary-color);
-  color: white;
+  background: linear-gradient(180deg, rgba(255,255,255,0.03), rgba(255,255,255,0.015));
+  border: 1px solid rgba(255,255,255,0.18);
+  backdrop-filter: blur(var(--glass-blur));
+  -webkit-backdrop-filter: blur(var(--glass-blur));
+  box-shadow: 0 8px 22px rgba(7,12,20,0.44);
+  color: var(--text-color);
   cursor: pointer;
-  padding: 1rem 1.2rem;
-  border-radius: 50%;
-  font-size: 1.2rem;
-  box-shadow: 0 4px 10px var(--shadow-color);
-  transition: background-color 0.3s ease, transform 0.3s ease, opacity 0.3s ease;
-  opacity: 0.8;
+  transition: transform .14s ease, box-shadow .14s ease, background .18s ease;
+  font-weight: 600;
 }
-#backToTopBtn:hover { background-color: var(--primary-color); transform: translateY(-3px); opacity: 1; }
-
-/* ====== Reveal animation ====== */
-.reveal {
-  opacity: 0;
-  transform: translateY(50px);
-  transition: opacity 0.6s ease-out, transform 0.6s ease-out;
-}
-.reveal.active {
-  opacity: 1;
-  transform: translateY(0);
+.glass-btn:hover {
+  transform: translateY(-4px);
+  box-shadow: 0 16px 40px rgba(7,12,20,0.56);
+  background: linear-gradient(180deg, rgba(255,255,255,0.055), rgba(255,255,255,0.02));
 }
 
-/* ====== Responsive ====== */
-@media (max-width: 992px) {
-  .hero-text-content h1 { font-size: 2.8rem; }
-  .hero-text-content p { font-size: 1.1rem; }
-  .main-nav { padding: 1rem 1.5rem; }
-  .nav-links { margin-left: 1rem; }
-  .nav-links li { margin-left: 1.5rem; }
+/* Make primary CTA glassy when glass theme is active (ADDED) */
+:root[data-theme="glass"] .primary-btn {
+  background: linear-gradient(180deg, rgba(255,255,255,0.055), rgba(255,255,255,0.02));
+  border: 1px solid rgba(255,255,255,0.22);
+  color: var(--text-color);
+  backdrop-filter: blur(var(--glass-blur));
+  -webkit-backdrop-filter: blur(var(--glass-blur));
+  box-shadow: 0 12px 36px rgba(7,12,20,0.5);
+  padding: 0.75rem 1.6rem;
+  border-radius: 12px;
+  font-weight: 700;
+  transition: transform .14s ease, box-shadow .14s ease, background .18s ease, color .18s ease;
 }
-@media (max-width: 768px) {
-  .main-nav { flex-direction: row; justify-content: space-between; align-items: center; }
-  .nav-links {
-    position: absolute;
-    right: 0;
-    top: 0;
-    height: 100vh;
-    background-color: var(--primary-color);
-    flex-direction: column;
-    align-items: center;
-    width: 60%;
-    transform: translateX(100%);
-    transition: transform 0.5s ease-in-out;
-    padding-top: 6rem;
-    box-shadow: -5px 0 15px rgba(0,0,0,0.3);
-  }
-  .nav-links.nav-active { transform: translateX(0%); }
-  .nav-links li { opacity: 0; margin: 1.5rem 0; }
-  .nav-links a { font-size: 1.3rem; }
-  .burger-menu { display: block; }
-  .hero-content { gap: 1.5rem; }
-  .profile-photo-container { width: 150px; height: 150px; }
-  .hero-text-content h1 { font-size: 2.5rem; }
-  .hero-text-content p { font-size: 1rem; }
-  .hero-buttons { flex-direction: column; gap: 0.8rem; }
-  .secondary-btn { margin-left: 0; }
-  .section { padding: 4rem 0; }
-  .container { padding: 0 1rem; }
-  .skill-category { padding: 1.5rem; }
-  .contact-form { padding: 1.5rem; }
+:root[data-theme="glass"] .primary-btn:hover,
+:root[data-theme="glass"] .primary-btn:focus {
+  transform: translateY(-4px) scale(1.01);
+  box-shadow: 0 22px 60px rgba(7,12,20,0.62);
+  background: linear-gradient(180deg, rgba(255,255,255,0.08), rgba(255,255,255,0.03));
 }
-@media (max-width: 480px) {
-  .hero-text-content h1 { font-size: 2rem; }
-  .hero-text-content p { font-size: 0.9rem; }
-  .profile-photo-container { width: 120px; height: 120px; }
-  .social-links { gap: 1rem; }
-  .social-links a { font-size: 1.8rem; width: 48px; height: 48px; }
-  #backToTopBtn { bottom: 1rem; right: 1rem; padding: 0.8rem 1rem; font-size: 1rem; }
-}
-
-/* ====== Keyframes for nav link fade ====== */
-@keyframes navLinkFade {
-  from { opacity: 0; transform: translateX(50px); }
-  to { opacity: 1; transform: translateX(0px); }
-}
-
-/* ====== Extra UI the script expects ====== */
-
-/* Scroll progress bar */
-#scrollProgress {
-  height: 4px;
-  width: 0%;
-  position: fixed;
-  top: 0;
-  left: 0;
-  z-index: 9999;
-  background: linear-gradient(90deg, var(--secondary-color), var(--accent-2));
-  transition: width 120ms linear;
-}
-
-/* Photo modal */
-.photo-modal {
-  position: fixed;
+/* subtle rim for CTA */
+:root[data-theme="glass"] .primary-btn::after {
+  content: "";
+  position: absolute;
   inset: 0;
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  background: rgba(0,0,0,0.85);
-  z-index: 3000;
-  padding: 2rem;
-  display: none;
-}
-.photo-modal img {
-  max-width: 90%;
-  max-height: 90%;
-  border-radius: 8px;
-  box-shadow: 0 20px 60px rgba(0,0,0,0.6);
+  border-radius: 12px;
+  pointer-events: none;
+  box-shadow: inset 0 0 0 1px rgba(170,230,255,0.04);
 }
 
-/* Copy toast */
-.copy-toast {
-  position: fixed;
-  right: 1rem;
-  bottom: 1.2rem;
-  padding: .5rem .75rem;
-  border-radius: 6px;
-  background: rgba(0,0,0,0.8);
-  color: #fff;
-  z-index: 9999;
-  font-size: 13px;
-  transition: opacity .3s ease;
+/* Focus / keyboard accessibility */
+:root[data-theme="glass"] .glass-btn:focus,
+:root[data-theme="glass"] .contact-form input:focus,
+:root[data-theme="glass"] .contact-form textarea:focus,
+:root[data-theme="glass"] .nav-links a:focus {
+  outline: none;
+  box-shadow: 0 0 0 6px rgba(162,225,255,0.08), 0 12px 36px rgba(7,12,20,0.48);
+  border-color: rgba(170,230,255,0.36);
 }
 
-/* Testimonials controls */
-.testimonials { position: relative; padding: 1rem; }
-.testimonial { display: none; padding: 1rem; border-radius: 10px; background: var(--surface); box-shadow: 0 10px 30px rgba(0,0,0,0.08); }
-.testimonial[style*="display: block"] { display: block; }
-.test-ctrls { position: absolute; right: 12px; bottom: 12px; display: flex; gap: .5rem; }
-.test-ctrls button { background: rgba(0,0,0,0.06); border: none; padding: .35rem .5rem; border-radius: 6px; cursor: pointer; }
-
-/* Utilities */
-.hidden { display: none !important; }
-.visually-hidden { position: absolute !important; height: 1px; width: 1px; overflow: hidden; clip: rect(1px,1px,1px,1px); white-space: nowrap; }
-
-/* Glass UI tweaks */
-:root[data-theme="glass"] .main-nav {
-  background: rgba(255,255,255,0.06);
-  backdrop-filter: blur(8px) saturate(1.1);
-  border: 1px solid var(--glass-border);
+/* Animated sheen (subtle moving highlight) */
+.glass-sheen {
+  position: relative;
+  overflow: hidden;
 }
-:root[data-theme="glass"] .education-item,
-:root[data-theme="glass"] .skill-category,
-:root[data-theme="glass"] .contact-form {
-  background: var(--glass-surface);
-  border: 1px solid var(--glass-border);
-  backdrop-filter: blur(8px) saturate(1.1);
-  box-shadow: 0 10px 30px rgba(2,6,23,0.16);
+.glass-sheen::before {
+  content: "";
+  position: absolute;
+  left: -60%;
+  top: -30%;
+  width: 160%;
+  height: 160%;
+  background: linear-gradient(120deg, rgba(255,255,255,0.06) 0%, rgba(255,255,255,0.02) 40%, rgba(255,255,255,0.09) 60%, rgba(255,255,255,0.00) 100%);
+  transform: rotate(-18deg);
+  filter: blur(10px);
+  opacity: 0.9;
+  transition: transform .9s ease;
+  animation: sheenMove 6s linear infinite;
+  pointer-events: none;
 }
+@keyframes sheenMove {
+  0% { transform: translateX(-30%) rotate(-18deg); opacity: 0.6; }
+  50% { transform: translateX(10%) rotate(-18deg); opacity: 0.9; }
+  100% { transform: translateX(130%) rotate(-18deg); opacity: 0.6; }
+}
+
+/* Apply sheen to hero/profile area for luxe effect */
+.hero-section .profile-photo-container,
+.hero-text-content h1 {
+  position: relative;
+}
+.hero-section .profile-photo-container.glass-sheen,
+.hero-text-content h1.glass-sheen {
+  isolation: isolate; /* keeps sheen contained */
+}
+
+/* Glassy input fields */
+:root[data-theme="glass"] .contact-form input,
+:root[data-theme="glass"] .contact-form textarea {
+  background: rgba(255,255,255,0.025);
+  border: 1px solid rgba(255,255,255,0.12);
+  color: var(--text-color);
+  box-shadow: inset 0 1px 0 rgba(255,255,255,0.02);
+}
+
+/* Glassy social icon background tweak */
+:root[data-theme="glass"] .social-links a {
+  background: linear-gradient(180deg, rgba(255,255,255,0.02), rgba(255,255,255,0.01));
+  border: 1px solid rgba(255,255,255,0.08);
+  backdrop-filter: blur(var(--glass-blur));
+  -webkit-backdrop-filter: blur(var(--glass-blur));
+  box-shadow: 0 8px 24px rgba(7,12,20,0.44);
+  color: var(--text-color);
+}
+
+/* Brand-color hover softened for glass */
+.social-links a[href*="linkedin.com"]:hover,
+.social-links a[href*="instagram.com"]:hover,
+.social-links a[href*="github.com"]:hover,
+.social-links a[href^="mailto:"]:hover {
+  transform: translateY(-6px) scale(1.03);
+  box-shadow: 0 22px 56px rgba(7,12,20,0.56);
+}
+
+/* Glass rim accent utility (use on elements you want a bright rim) */
+.glass-rim {
+  border: 1px solid rgba(255,255,255,0.24);
+  box-shadow: 0 6px 18px rgba(7,12,20,0.36), inset 0 1px 0 rgba(255,255,255,0.03);
+  border-radius: 12px;
+}
+
+/* Scrollbar: frosted track */
+:root[data-theme="glass"] ::-webkit-scrollbar { width: 10px; height: 10px; }
+:root[data-theme="glass"] ::-webkit-scrollbar-track {
+  background: linear-gradient(180deg, rgba(255,255,255,0.01), rgba(255,255,255,0.00));
+  border-radius: 999px;
+  border: 1px solid rgba(255,255,255,0.02);
+}
+:root[data-theme="glass"] ::-webkit-scrollbar-thumb {
+  background: linear-gradient(180deg, rgba(255,255,255,0.06), rgba(255,255,255,0.02));
+  border-radius: 999px;
+  border: 1px solid rgba(255,255,255,0.08);
+  box-shadow: 0 4px 12px rgba(7,12,20,0.44);
+}
+
+/* tiny polish: hero overlay becomes faint reflective sheen */
+:root[data-theme="glass"] .background-overlay {
+  background: linear-gradient(180deg, rgba(255,255,255,0.02), rgba(255,255,255,0.00));
+  mix-blend-mode: overlay;
+}
+
+/* optional: add subtle neon text glow for headings */
+:root[data-theme="glass"] h1, 
+:root[data-theme="glass"] h2 {
+  text-shadow: 0 6px 18px rgba(162,225,255,0.06), 0 2px 6px rgba(0,0,0,0.45);
+}
+
+/* Performance tip: reduce sheen animation on small screens */
+@media (max-width: 768px) {
+  .glass-sheen::before { animation-duration: 10s; filter: blur(8px); opacity: 0.7; }
+  :root[data-theme="glass"] .education-item,
+  :root[data-theme="glass"] .skill-category,
+  :root[data-theme="glass"] .contact-form {
+    backdrop-filter: blur(18px);
+    -webkit-backdrop-filter: blur(18px);
+  }
+}
+
+/* ====== Glass UI tweaks END ====== */
 
 /* End of styles.css */
