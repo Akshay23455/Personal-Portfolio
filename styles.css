@@ -149,13 +149,18 @@ h1, h2, h3 {
 .main-nav.scrolled { box-shadow: 0 6px 18px rgba(0,0,0,0.12); }
 
 /* grouping */
-.nav-left { display:flex; align-items:center; gap:1rem; }
-.nav-brand {
-  color: white;
-  font-size: 1.4rem;
-  font-weight: 700;
-  letter-spacing: 1px;
+.nav-left {
+  display: flex;
+  align-items: center;
 }
+
+.nav-brand {
+  transform: none;       /* removes tilt/rotation */
+  font-style: normal;    /* removes italic */
+  font-weight: 600;
+  font-size: 1.6rem;
+}
+
 
 /* nav actions contain theme + links */
 .nav-actions { display:flex; align-items:center; gap:1rem; width:100%; justify-content:flex-end; }
