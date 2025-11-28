@@ -242,5 +242,7 @@ document.addEventListener("DOMContentLoaded", () => {
     carousel.tabIndex = 0;
     carousel.addEventListener('keydown', (e)=> { if (e.key==='ArrowLeft') prev(); if (e.key==='ArrowRight') next(); });
   });
+// Update footer year automatically
+document.getElementById("current-year").textContent = new Date().getFullYear();
 
 }); // DOMContentLoaded
